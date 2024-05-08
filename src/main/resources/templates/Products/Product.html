@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title of the Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h1>Welcome to My Thymeleaf Page</h1>
+    <p>This is a sample Thymeleaf page.</p>
+    <p>Thymeleaf is a modern server-side Java template engine for web and standalone environments.</p>
+    <p>It can process HTML, XML, JavaScript, CSS, and text files, and is especially well-suited for Spring-based applications.</p>
+</div>
+<a th:href="@{/Form}"> <button> add product </button></a>
+<a th:href="@{/Listsort}" > <button> Sort </button>  </a>
+<table id="example" class="table table-bordered" style="width: 100%">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>description</th>
+        <th>price</th>
+        <th>quantity</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${list_produit}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.description}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.quantity}"></td>
+        <td>
+            <a th:href="@{/Formedit(id=${p.id})}"><button>Edit</button></a>
+        </td>
+        <td>
+            <a th:href="@{/Productdelete(id=${p.id})}">Delete</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

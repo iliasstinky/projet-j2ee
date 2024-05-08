@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #taskFormAdd {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        #taskFormAdd h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #taskFormAdd label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #taskFormAdd input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #taskFormAdd button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #taskFormAdd button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .calendar-icon {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #007bff;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Calendar Icon -->
+<a href="@{/Taskform}" class="calendar-icon"><i class="fas fa-calendar-plus"></i></a>
+
+<!-- Form to add a task -->
+<div id="taskFormAdd">
+    <h2>Add Task</h2>
+    <form th:action="@{saveTaskForm}" method="post" th:object="${projectTask}">
+        <label for="summary">Summary:</label>
+        <input type="text" id="summary" name="summary" th:field="*{summary}" required>
+        <label for="acceptanceCriteria">Acceptance Criteria:</label>
+        <input type="text" id="acceptanceCriteria" name="acceptanceCriteria" th:field="*{acceptanceCriteria}" required>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" th:field="*{status}" required>
+        <button type="submit">Add Task</button>
+    </form>
+</div>
+
+</body>
+</html>
