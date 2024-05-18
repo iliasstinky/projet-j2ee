@@ -3,56 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management</title>
+    <title>MyTaskNotion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
+        /* Dark theme for the entire site */
         body {
             margin: 0;
-            padding: 0;
+            background-color: rgb(32, 32, 32);
+            color: #fff; /* White text color */
+            font-family: Arial, sans-serif; /* Modern font */
+            padding-top: 56px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f5f5f5; /* Light gray background */
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #000; /* Dark background for navbar */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar stays on top */
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important; /* White color for navbar links */
         }
 
         .container {
-            position: relative; /* Make container a positioning context for absolute positioning */
+            position: relative;
             display: flex;
-            justify-content: space-around;
+            flex-direction: row; /* Align items horizontally */
+            justify-content: space-around; /* Space out the tables */
             align-items: flex-start;
             width: 90%;
-            max-width: 1200px;
-            background-color: #fff; /* White background for container */
+            max-width: 1600px; /* Increased max-width */
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background for container */
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-            padding: 20px;
-            height: 50vh;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow effect */
+            padding: 30px;
+            margin-top: 100px; /* Move the container down */
+            height: 600px; /* Fixed height */
+            overflow: auto; /* Enable scrolling */
         }
 
         .table-container {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9; /* Light gray background for individual table containers */
-            border-radius: 5px;
-            overflow: hidden; /* Prevents table overflow */
-            height: 45vh;
+            margin: 0 10px; /* Add horizontal margin between tables */
+            padding: 20px;
+            background-color: rgba(50, 50, 50, 0.8); /* Darker semi-transparent background */
+            border: 1px solid #444; /* Darker border */
+            border-radius: 10px;
+            overflow: auto; /* Enable scrolling */
+            height: 100%; /* Ensure the table container fills the height */
+            max-height: 550px; /* Set a maximum height */
         }
 
         .dragabble-table {
             width: 100%;
-            border-collapse: collapse; /* Collapse border spacing */
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.05); /* Slightly darker background for table */
         }
 
         .dragabble-table th,
         .dragabble-table td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd; /* Light gray border between table rows */
+            padding: 15px;
+            border-bottom: 1px solid #555; /* Darker border */
+            color: #fff; /* White color for table text */
         }
 
         .dragabble-table tbody {
@@ -64,59 +86,87 @@
         }
 
         .dragabble-table tbody tr:hover {
-            background-color: #f0f0f0; /* Light gray background on hover */
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background on hover */
         }
 
         .ui-state-highlight {
-            height: 50px; /* Height of the placeholder */
-            background-color: #cce5ff; /* Light blue background for the placeholder */
-            border: 2px dashed #007bff; /* Dashed border for the placeholder */
+            height: 50px;
+            background-color: #444; /* Darker highlight */
+            border: 2px dashed #007bff;
         }
 
         .dragabble-table a {
-            color: #007bff; /* Blue color for the Edit Task link */
+            color: #007bff;
             text-decoration: none;
             font-weight: bold;
         }
 
         .dragabble-table a:hover {
-            text-decoration: underline; /* Underline on hover for the Edit Task link */
+            text-decoration: underline;
         }
+
         .red-icon {
-         color: black;
+            color: #ff5f5f; /* Red color for red icons */
         }
+
 .calendar-icon {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 300px); /* Adjusted top position to align with the top of the container tables */
+    left: 10%; /* Left position */
+    color: #444; /* Darker color for calendar icon */
+    font-size: 3rem; /* Larger icon */
 }
 
+        .btn-primary {
+            background-color: #007bff; /* Blue background for primary buttons */
+            color: #fff; /* White text color for primary buttons */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #585858; /* Darker blue on hover */
+        }
+
+        .add-button {
+            color: #404040; /* Light gray color for the button icon */
+        }
 
 
- <!-- Custom CSS -->
-.btn-primary {
-    position: fixed;
-    top: 100;
-    left: 0;
-    right: 80;
-}
-.calendar-icon {
-    position: fixed;
-    top: 20%;
-    left: 20%;
-    color: #000; /* Black color */
-    transform: translate(-50%, -50%);
-        font-size: 2rem; /* Adjust size as needed */
-
-}
+       .task-button {
+        text-align: right;
+    }
 
     </style>
+
 </head>
 <body>
 
-
-
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #202020;">
+    <a class="navbar-brand" href="#">MyTaskNotion</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/AddUser}" class="nav-link" href="#">About</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div class="container">
     <!-- Modal -->
@@ -128,8 +178,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <td th:text="${projectTask1.id}"></td>
+                    <div class="modal-body">
 
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -140,10 +191,7 @@
 
     <a th:href="@{/Taskform}" class="calendar-icon"><i class="fa-solid fa-circle-plus fa-beat-fade"></i></a>
 
-
     <div class="table-container">
-
-
         <table id="table1" class="dragabble-table">
             <thead>
             <tr>
@@ -156,7 +204,6 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
-
                 </td>
             </tr>
             </tbody>
@@ -175,8 +222,8 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
-                    <a th:href="@{/taskModal(taskId=${task.id})}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Launch static backdrop modal
+                    <a th:href="@{/taskModal(taskid=${task.id})}" class="btn task-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-circle-info" style="color: #288644;"></i>
                     </a>
                 </td>
             </tr>
@@ -196,29 +243,46 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
-
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-<script>
-    $(function() {
-        $(".dragabble-table tbody").sortable({
-            placeholder: "ui-state-highlight",
-            helper: "clone",
-            forcePlaceholderSize: true,
-            zIndex: 9999
-        }).disableSelection();
-    });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $(".dragabble-table tbody").sortable({
+                placeholder: "ui-state-highlight",
+                helper: "clone",
+                forcePlaceholderSize: true,
+                zIndex: 9999
+            }).disableSelection();
+        });
 
+        function fetchTaskData() {
+            $.ajax({
+                url: '/taskModal',
+                method: 'GET',
+                success: function(projectTask1) {
+                    // Update the modal content with projectTask1 data
+                    $('.modal-body').html('<p>Task ID: ' + projectTask1.id + '</p>');
+                    // Show the modal
+                    $('#exampleModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error('Error:', status, error);
+                }
+            });
+        }
 
+        $('.modal-body').html(`
+            <p>Task ID: ${projectTask1.id}</p>
+            Add more properties as needed
+        `);
+    </script>
 
-
-</script>
 </body>
 </html>

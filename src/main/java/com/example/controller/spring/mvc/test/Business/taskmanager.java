@@ -15,8 +15,6 @@ public class taskmanager implements taskmanagerrepo {
     @Autowired
     private ProjectTaskrepo rp;
 
-    @Autowired
-    private taskmanagerrepo taskmanagerrepo;
 
 
     @Override

@@ -18,7 +18,7 @@ public class ProjectTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
 
-    private long id;
+    private int id;
 
     @NotEmpty
     private String summary;

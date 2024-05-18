@@ -4,6 +4,7 @@ package com.example.controller.spring.mvc.test.web;
 import com.example.controller.spring.mvc.test.Business.taskmanagerrepo;
 import com.example.controller.spring.mvc.test.doa.Entities.ProjectTask;
 import com.example.controller.spring.mvc.test.doa.repositories.ProjectTaskrepo;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +68,7 @@ public class ProjectTaskController {
     public String DeleteTask(@RequestParam(name= "id") int id , Model model ){
 
 
-       if  (taskman.deleteTaskbyid(id)) {
+       if  ( taskman.deleteTaskbyid(id)) {
 
            return "redirect:cc" ;
        } else {
@@ -78,8 +79,9 @@ public class ProjectTaskController {
     }
 
      @GetMapping("/taskModal")
-    public String ShowModalInfo(@RequestParam(name = "taskId") int taskId , Model model) {
-         ProjectTask projectTask1 = taskman.getProjecttaskbyId(taskId);
+     @ResponseBody
+    public String ShowModalInfo(@RequestParam(name = "taskid") int taskid , Model model) {
+         ProjectTask projectTask1 = taskman.getProjecttaskbyId(taskid);
          model.addAttribute("projectTask1", projectTask1);
          return "redirect:cc";
      }
