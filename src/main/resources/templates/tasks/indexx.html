@@ -10,12 +10,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
-        /* Dark theme for the entire site */
         body {
             margin: 0;
             background-color: rgb(32, 32, 32);
-            color: #fff; /* White text color */
-            font-family: Arial, sans-serif; /* Modern font */
+            color: #fff;
+            font-family: Arial, sans-serif;
             padding-top: 56px;
             display: flex;
             justify-content: center;
@@ -24,57 +23,81 @@
         }
 
         .navbar {
-            background-color: #000; /* Dark background for navbar */
+            background-color: #202020;
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000; /* Ensure navbar stays on top */
+            z-index: 1000;
         }
 
-        .navbar-brand, .nav-link {
-            color: #fff !important; /* White color for navbar links */
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff !important;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .nav-item:last-child .nav-link {
+            background-color: #007bff;
+            color: #fff !important;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item:last-child .nav-link:hover {
+            background-color: #0056b3;
         }
 
         .container {
             position: relative;
             display: flex;
-            flex-direction: row; /* Align items horizontally */
-            justify-content: space-around; /* Space out the tables */
+            flex-direction: row;
+            justify-content: space-around;
             align-items: flex-start;
             width: 90%;
-            max-width: 1600px; /* Increased max-width */
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background for container */
+            max-width: 1600px;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow effect */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
             padding: 30px;
-            margin-top: 100px; /* Move the container down */
-            height: 600px; /* Fixed height */
-            overflow: auto; /* Enable scrolling */
+            margin-top: 100px;
+            height: 600px;
+            overflow: auto;
         }
 
         .table-container {
             flex: 1;
-            margin: 0 10px; /* Add horizontal margin between tables */
+            margin: 0 10px;
             padding: 20px;
-            background-color: rgba(50, 50, 50, 0.8); /* Darker semi-transparent background */
-            border: 1px solid #444; /* Darker border */
+            background-color: rgba(50, 50, 50, 0.8);
+            border: 1px solid #444;
             border-radius: 10px;
-            overflow: auto; /* Enable scrolling */
-            height: 100%; /* Ensure the table container fills the height */
-            max-height: 550px; /* Set a maximum height */
+            overflow: auto;
+            height: 100%;
+            max-height: 550px;
         }
 
         .dragabble-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: rgba(255, 255, 255, 0.05); /* Slightly darker background for table */
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .dragabble-table th,
         .dragabble-table td {
             padding: 15px;
-            border-bottom: 1px solid #555; /* Darker border */
-            color: #fff; /* White color for table text */
+            border-bottom: 1px solid #555;
+            color: #fff;
         }
 
         .dragabble-table tbody {
@@ -86,12 +109,12 @@
         }
 
         .dragabble-table tbody tr:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background on hover */
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .ui-state-highlight {
             height: 50px;
-            background-color: #444; /* Darker highlight */
+            background-color: #444;
             border: 2px dashed #007bff;
         }
 
@@ -106,20 +129,20 @@
         }
 
         .red-icon {
-            color: #ff5f5f; /* Red color for red icons */
+            color: #ff5f5f;
         }
 
-.calendar-icon {
-    position: fixed;
-    top: calc(50% - 300px); /* Adjusted top position to align with the top of the container tables */
-    left: 10%; /* Left position */
-    color: #444; /* Darker color for calendar icon */
-    font-size: 3rem; /* Larger icon */
-}
+        .calendar-icon {
+            position: fixed;
+            top: calc(50% - 300px);
+            left: 10%;
+            color: #444;
+            font-size: 3rem;
+        }
 
         .btn-primary {
-            background-color: #007bff; /* Blue background for primary buttons */
-            color: #fff; /* White text color for primary buttons */
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -128,25 +151,24 @@
         }
 
         .btn-primary:hover {
-            background-color: #585858; /* Darker blue on hover */
+            background-color: #0056b3;
         }
 
         .add-button {
-            color: #404040; /* Light gray color for the button icon */
+            color: #404040;
         }
 
-
-       .task-button {
-        text-align: right;
-    }
-
+        .task-button {
+            text-align: right;
+        }
     </style>
+
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #202020;">
-    <a class="navbar-brand" href="#">MyTaskNotion</a>
+    <a class="navbar-brand" th:href="@{/mainbutton}">MyTaskNotion</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -162,7 +184,7 @@
                 <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/AddUser}" class="nav-link" href="#">About</a>
+                <a th:href="@{/AddUser}" class="nav-link" href="#">Sign Up</a>
             </li>
         </ul>
     </div>

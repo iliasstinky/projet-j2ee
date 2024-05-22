@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        #SignUpForm {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            background-color: #1f1f1f;
+        }
+
+        #SignUpForm h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        #SignUpForm label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #b3b3b3;
+        }
+
+        #SignUpForm input[type="text"],
+        #SignUpForm input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        #SignUpForm button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #SignUpForm button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .calendar-icon {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #007bff;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Calendar Icon -->
+<a class="calendar-icon"><i class="fas fa-calendar-plus"></i></a>
+
+<!-- Form to sign up -->
+<div id="SignUpForm">
+    <h2>Sign Up</h2>
+    <form th:action="@{/SaveUser}" method="post" th:object="${User}">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" th:value="${User.username}" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:value="${User.password}" required>
+        </div>
+        <input type="text" id="role" name="role" th:value="'user'" required style="display: none;">
+        <button type="submit">Create Account</button>
+    </form>
+</div>
+
+</body>
+</html>
