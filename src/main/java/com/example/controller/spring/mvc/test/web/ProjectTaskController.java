@@ -14,7 +14,6 @@ import org.thymeleaf.model.IModel;
 import java.util.List;
 
 @Controller
-@CrossOrigin
 
 public class ProjectTaskController {
     @Autowired
