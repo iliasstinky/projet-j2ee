@@ -160,11 +160,32 @@
             color: #404040;
         }
 
-        .task-button {
-            text-align: right;
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .task-actions a,
+        .task-actions button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-actions a:hover,
+        .task-actions button:hover {
+            background-color: #0056b3;
         }
     </style>
-
 
 </head>
 <body>
@@ -228,6 +249,10 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
+                        <a th:href="@{/taskModal(taskid=${task.id})}" class="info-button">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+
                 </td>
             </tr>
             </tbody>
@@ -246,9 +271,10 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
-                    <a th:href="@{/taskModal(taskid=${task.id})}" class="btn task-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa-solid fa-circle-info" style="color: #288644;"></i>
-                    </a>
+                        <a th:href="@{/taskModal(taskid=${task.id})}" class="info-button">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+
                 </td>
             </tr>
             </tbody>
@@ -267,6 +293,10 @@
                     <span th:text="${task.summary}">Item Summary</span>
                     <a th:href="@{/TaskFormEditing(id=${task.id})}"><i class="fa-solid fa-marker"></i></a>
                     <a th:href="@{/DeleteTask(id=${task.id})}"> <i class="fa-solid fa-trash red-icon"></i></a>
+                        <a th:href="@{/taskModal(taskid=${task.id})}" class="info-button">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+
                 </td>
             </tr>
             </tbody>
@@ -308,5 +338,5 @@
         `);
     </script>
 
-    </body>
+        </body>
 </html>

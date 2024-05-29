@@ -16,18 +16,21 @@ public class ControllerSpringMvcTestApplication implements CommandLineRunner {
 	private Productrepositories pr;
 	@Autowired
 	private ProjectTaskrepo pro;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(ControllerSpringMvcTestApplication.class, args);
 	}
 
-	Product product1 = new Product(1 ,"dd" , 1 , 4);
-	Product product2 = new Product(2, "vv" , 2 , 5);
+
     ProjectTask proo = new ProjectTask(1 , "dd" , "jfjf", "Done");
+	ProjectTask pro1 = new ProjectTask(2 , "ff" , "fefefe", "In Progress");
+
 	@Override
 	public void run(String... args) throws Exception {
 
-		pr.save(product1);
-		pr.save(product2);
+
 		 pro.save(proo);
+		 pro.save(pro1);
 	}
 }

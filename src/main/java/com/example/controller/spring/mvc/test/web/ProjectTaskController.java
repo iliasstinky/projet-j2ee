@@ -78,11 +78,10 @@ public class ProjectTaskController {
     }
 
      @GetMapping("/taskModal")
-     @ResponseBody
     public String ShowModalInfo(@RequestParam(name = "taskid") int taskid , Model model) {
          ProjectTask projectTask1 = taskman.getProjecttaskbyId(taskid);
          model.addAttribute("projectTask1", projectTask1);
-         return "redirect:cc";
+         return "Forms/ShowTask";
      }
 }
 
